@@ -5,28 +5,37 @@
     <script src="data_generator.js"></script>
     <script src="moment.min.js"></script>
     <script src="greg_twittler.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="application.css" />
   </head>
   <body>
     <script>
       $(document).ready(runOnOpen);
     </script>
-    <h1>Twittler: like Twitter, but worse</h1>
-    <div class="send-tweets">
-    	<h2>Send Tweets</h2>
-    	<label for="my-username">Username:</label>
-    	<input type="text" id="my-username" />
-    	<label for="my-message-input">Send Tweet:</label>
-    	<input type="text" class="my-message" id="my-message-input" disabled />
-    	<input type="submit" class="my-message button" value="Tweet" disabled />
-    </div>
-    <div class="tweets">
-    	<h2>All Tweets</h2>
-    	<input type="checkbox">Pause Updating</input>
-    	<ul class="tweets"></ul>
-    </div>
-    <div class="user">
-    	<h2>User Timeline</h2>
-    	<ul class="user"></ul>
-    </div>
+    <div class="container">
+		  <h1>Twittler: like Twitter, but worse</h1>
+		  <div class="send-tweets row">
+		  	<div class="">
+					<label for="my-username">Username:</label>
+					<input type="text" id="my-username" />
+					<label for="my-message-input">Send Tweet:</label>
+					<input type="text" class="my-message" id="my-message-input" disabled />
+					<input type="submit" class="my-message btn btn-sm btn-default" value="Tweet" disabled />
+				</div>
+		  </div>
+		  <div class="row text-center">
+				<input type="checkbox" class="pause">Pause Updating</input>
+			</div>
+		  <div class="row">
+				<div class="tweets col-sm-6">
+					<h2>All Tweets</h2>
+					<ul class="tweets list-unstyled"></ul>
+				</div>
+				<div class="user col-sm-6">
+					<h2>User Timeline</h2>
+					<ul class="user list-unstyled"></ul>
+				</div>
+			</div>
+		</div>
   </body>
 </html>

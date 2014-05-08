@@ -24,7 +24,7 @@ var runOnOpen = function () {
 var outputNewTweets = function () {
   
   //only update if the update isn't paused
-  if ($('.tweets').find('input').is(':checked')) {
+  if ($('.pause').is(':checked')) {
     //does nothing
   } else {
     var tweets = streams.home;
@@ -39,18 +39,23 @@ var outputNewTweets = function () {
     }
 
     //deletes old tweets
-    var max_tweets = 20;
+    var max_tweets = 10;
     var visible_tweets = $tweet_ul.children('li');
     visible_tweets.slice(max_tweets).remove();
 
     //Adds onclick event for all tweets
-    $('ul.tweets').find('li').on('click','a',outputUserTimeline);
+    $('ul.tweets').find('div.panel-heading').on('click',outputUserTimeline);
   }
 };
 
-var outputTweet = function (tweet, $location) {
-  $location.prepend("<li><a href='#')'>@" + tweet.user + "</a>: " 
-      + tweet.message + " <span>[" + moment(tweet.created_at).fromNow() + "]</span></li>");
+var outputTweet = function (tweet, $location, greenOutput) {
+  var panel_class = 'panel-primary';
+  if (greenOutput) {
+    panel_class = 'panel-success';
+  }
+  
+  $location.prepend('<li style="clear:both;"><div class="panel ' + panel_class + '"><div class="panel-heading">@' 
+      + tweet.user + '</div><div class="panel-body"><p style="float:left">' + tweet.message + '</p><p style="float:right">[' + moment(tweet.created_at).fromNow() + ']</p></li>');
 };
 
 var outputUserTimeline = function (event) {
@@ -69,8 +74,11 @@ var outputUserTimeline = function (event) {
   
   //Adds all tweets for given user
   for (var i=0; i<user_tweets.length; i++) {
-    outputTweet(user_tweets[i], $user_ul);
+    outputTweet(user_tweets[i], $user_ul, true);
   }
+  
+  //Adds onclick event for all user tweets
+  $('ul.user').find('li').on('click','a',outputUserTimeline);
   
 };
 
