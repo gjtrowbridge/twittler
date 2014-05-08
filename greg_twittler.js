@@ -22,25 +22,30 @@ var runOnOpen = function () {
 };
 
 var outputNewTweets = function () {
-  var tweets = streams.home;
-  var $tweet_ul = $('ul.tweets');
   
-  //adds new tweets
-  while (index < streams.home.length) {
-    var tweet = streams.home[index];
-    
-    outputTweet(tweet, $tweet_ul)
-    index++;
+  //only update if the update isn't paused
+  if ($('.tweets').find('input').is(':checked')) {
+    //does nothing
+  } else {
+    var tweets = streams.home;
+    var $tweet_ul = $('ul.tweets');
+
+    //adds new tweets
+    while (index < streams.home.length) {
+      var tweet = streams.home[index];
+
+      outputTweet(tweet, $tweet_ul)
+      index++;
+    }
+
+    //deletes old tweets
+    var max_tweets = 20;
+    var visible_tweets = $tweet_ul.children('li');
+    visible_tweets.slice(max_tweets).remove();
+
+    //Adds onclick event for all tweets
+    $('ul.tweets').find('li').on('click','a',outputUserTimeline);
   }
-  
-  //deletes old tweets
-  var max_tweets = 10;
-  var visible_tweets = $tweet_ul.children('li');
-  visible_tweets.slice(max_tweets).remove();
-  
-  //Adds onclick event for all tweets
-  $('ul.tweets').find('li').on('click','a',outputUserTimeline);
-  
 };
 
 var outputTweet = function (tweet, $location) {
