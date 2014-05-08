@@ -78,7 +78,7 @@ var outputUserTimeline = function (event) {
   }
   
   //Adds onclick event for all user tweets
-  $('ul.user').find('li').on('click','a',outputUserTimeline);
+  $('ul.user').find('div.panel-heading').on('click',outputUserTimeline);
   
 };
 
